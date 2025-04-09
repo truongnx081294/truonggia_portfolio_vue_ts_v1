@@ -2,21 +2,11 @@
 import "../assets/css/Home.css";
 </script>
 <template>
-  <section id="about" className="{styles.about}">
-    <h1><span>01.</span> <span> My Arsenal</span></h1>
+  <section id="about" className="about">
+    <h1><span>01.</span> <span> My skills</span></h1>
 
-    {/*
-    <p>
-      I enjoy building client-side apps and websites,also currently exploring
-      some light backend to maybe transition to full mernstack. I also build
-      apps that leverage on the blockchain and web3 technologies with Solidity,
-      Ipfs, ethers js and co.
-    </p>
-    */}
-
-    <div className="{styles.technologies}">
+    <div className="technologies">
       <div>
-        {/* eslint-disable-next-line react/no-unescaped-entities*/}
         <h3>Core Technologies</h3>
         <ul>
           <li>Html & CSS</li>

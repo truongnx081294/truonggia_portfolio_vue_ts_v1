@@ -1,21 +1,15 @@
 <script setup lang="ts">
-import Image from "next/image";
 import { Featured } from "./data";
 import "../assets/css/Home.css";
-
-interface IProject {
-  category: string;
-  name: string;
-  details: string;
-  id: number;
-  gitlink?: URL;
-  livelink?: URL;
-}
+import ProjectDivComponent from "@/components/ProjectDivComponent.vue";
 </script>
 
 <template>
   <div className="container">
-    {Featured.map((project) => { return
-    <ProjectDiv key="{project.id}" project="{project}" />; })}
+    <ProjectDivComponent
+      v-for="(project, index) in Featured"
+      :key="index"
+      :project="project"
+    />
   </div>
 </template>

@@ -1,29 +1,4 @@
-<script setup>
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      delayChildren: 0.5,
-      staggerDirection: -1,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
-</script>
-
-<template>
-  <motion.ul :variants="container" initial="hidden" animate="show">
-    <motion.li :variants="item" :size="50">123</motion.li>
-    <motion.li :variants="item" :size="50">123</motion.li>
-  </motion.ul>
-</template>
-
-<!-- <script setup lang="ts">
+<script setup lang="ts">
 import "../assets/css/Home.css";
 import ContactIcons from "./ContactIconsComponent.vue";
 import { motion } from "motion-v";
@@ -49,8 +24,8 @@ const items = {
   <motion.div>
     <motion.section
       :variant="container"
-      :initial="container.hidden"
-      :animate="container.show"
+      initial="hidden"
+      animate="show"
       className="introduction"
     >
       <motion.h1 :variant="items">
@@ -86,4 +61,4 @@ const items = {
       </a>
     </motion.section>
   </motion.div>
-</template> -->
+</template>

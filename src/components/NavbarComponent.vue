@@ -2,22 +2,22 @@
 </script>
 
 <template>
-        <header className={styles.mobile_header} >
-          <h1> <Link href="/"> TonyTruong</Link> </h1> 
+        <header className="mobile_header" >
+          <h1> <a href="/"> TonyTruong</a> </h1> 
 
         </header>
-        <header className={styles.desktop_header} >
-          <h1> <Link href="/"> TonyTruong.</Link></h1>
+        <header className="desktop_header" >
+          <h1> <a href="/"> TonyTruong.</a></h1>
 
           <ul>
-            <li className={[styles.link, styles.link_anim].join(" ")}>  <Link href='/#about'> About</Link> </li>
-            <li className={[styles.link, styles.link_anim].join(" ")}> <Link href="/#projects" > Projects</Link></li>
+            <li className="link link_anim">  <a href='/#about'> About</a> </li>
+            <li className="link link_anim"> <a href="/#projects" > Projects</a></li>
  
             <li>
-              <button className={[styles.button, styles.button__mimas].join(' ')}>
-                <Link  target="blank" href="https://drive.google.com/file/d/1SspjX3pFynhnzA1uL6TS9pNRYAyIwdCu/view?usp=sharing" passHref>
+              <button className="button button__mimas">
+                <a  target="blank" href="https://drive.google.com/file/d/1SspjX3pFynhnzA1uL6TS9pNRYAyIwdCu/view?usp=sharing" passHref>
                     <span>Resume</span>
-                </Link>
+                </a>
               </button>
 		        </li>
           </ul>

@@ -6,7 +6,7 @@ import MotionResolver from 'motion-v/resolver'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue()
+  plugins: [vue(),
     Components({
       dts: true,
       resolvers: [

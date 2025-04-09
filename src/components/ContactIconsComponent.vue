@@ -2,42 +2,47 @@
 <template>
   <ul>
     <li>
-      <Link href="https://github.com/truongnx081294" target="blank">
-        <Image
-          src="/images/github.svg"
+      <a href="https://github.com/truongnx081294" target="blank">
+        <img
+          src="../assets/images/github.svg"
           alt="github"
           width="{25}"
           height="{25}"
         />
-      </Link>
+      </a>
     </li>
 
     <li>
-      <Link href="https://www.facebook.com/truongnx081294/" target="blank">
-        <Image
-          src="/images/twitter.svg"
+      <a href="https://www.facebook.com/truongnx081294/" target="blank">
+        <img
+          src="../assets/images/twitter.svg"
           alt="github"
           width="{25}"
           height="{25}"
         />
-      </Link>
+      </a>
     </li>
 
     <li>
-      <Link href="https://www.linkedin.com/in/truongnx081294/" target="blank">
-        <Image
-          src="/images/linkedin.svg"
+      <a href="https://www.linkedin.com/in/truongnx081294/" target="blank">
+        <img
+          src="../assets/images/linkedin.svg"
           alt="github"
           width="{25}"
           height="{25}"
         />
-      </Link>
+      </a>
     </li>
 
     <li>
-      <Link href="mailto:truongnx081294@gmail.com" target="blank">
-        <Image src="/images/mail.svg" alt="github" width="{25}" height="{25}" />
-      </Link>
+      <a href="mailto:truongnx081294@gmail.com" target="blank">
+        <img
+          src="../assets/images/mail.svg"
+          alt="github"
+          width="{25}"
+          height="{25}"
+        />
+      </a>
     </li>
   </ul>
 </template>

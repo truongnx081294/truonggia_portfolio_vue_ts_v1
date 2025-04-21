@@ -10,7 +10,7 @@
       </div>
 
       <div className="content">
-        <Intro />
+        <!-- <Intro /> -->
         <About />
         <Projects />
 

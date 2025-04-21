@@ -26,10 +26,10 @@ function getListProject() {
 
 <template>
   <div className="container">
-    <ProjectDivComponent
+    <!-- <ProjectDivComponent
       v-for="(project, index) in listProject"
       :key="index"
       :project="project"
-    />
+    /> -->
   </div>
 </template>

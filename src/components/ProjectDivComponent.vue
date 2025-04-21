@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { IFeatured } from "@/model/IFeatured.module";
-import type { IProject } from "@/model/IProject.module";
 import { motion } from "motion-v";
 
 defineProps(["project"]);
@@ -41,7 +39,7 @@ const items = {
     :variants="container"
   >
     <div>
-      <span>{{ project.category }}</span>
+      <span>{{ project.type }}</span>
       <h3 v-if="project.livelink">
         <a :href="`${project?.livelink?.href}`" target="blank">
           {{ project.name }}
@@ -52,7 +50,7 @@ const items = {
           {{ project.name }}
         </a>
       </h3>
-      <p>{{ project.details }}</p>
+      <p>{{ project.description }}</p>
       <div className="icon">
         <a
           v-if="project?.gitlink?.href"

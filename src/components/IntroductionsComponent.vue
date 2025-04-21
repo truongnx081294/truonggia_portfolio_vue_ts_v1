@@ -48,7 +48,7 @@ const items = {
       </motion.div>
 
       <a
-        href="https://drive.google.com/file/d/1SspjX3pFynhnzA1uL6TS9pNRYAyIwdCu/view?usp=sharing"
+        href="https://www.figma.com/proto/oyXzwXfyWaauPe3rxOO0r7/CV_NguyenXuanTruong?page-id=0%3A1&node-id=1-2&viewport=58%2C336%2C0.26&t=SADnWNetASy9vVIN-1&scaling=min-zoom&content-scaling=fixed"
         passHref
         target="blank"
       >

@@ -1,36 +1,48 @@
 <template>
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>📊 Dashboard</h2>
-    <a href="#">🏠 Trang chủ</a>
-    <a href="#">👤 Tài khoản</a>
-    <a href="#">📁 Dữ liệu</a>
-    <a href="#">⚙️ Cài đặt</a>
-    <a href="#">🚪 Đăng xuất</a>
-  </div>
-
-  <!-- Main Content -->
-  <div class="main">
-    <h1>Chào mừng, Admin!</h1>
-
-    <div class="card">
-      <h3>📌 Thông báo</h3>
-      <p>
-        Hệ thống đang hoạt động ổn định. Không có sự cố nào được ghi nhận hôm
-        nay.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>📝 Báo cáo nhanh</h3>
-      <p>
-        • Người dùng mới hôm nay: <strong>12</strong><br />
-        • Lượt truy cập: <strong>256</strong><br />
-        • Tỷ lệ chuyển đổi: <strong>4.8%</strong>
-      </p>
-    </div>
-  </div>
+  <List
+    item-layout="vertical"
+    :data-source="listUser"
+    class="demo-loadmore-list"
+  >
+    <template #renderItem="{ item }">
+      <ListItem>
+        <Skeleton avatar :title="false" :loading="!!item.loading" active>
+          <ListItemMeta :description="item.email">
+            <template #title>
+              <p>{{ item.username }}</p>
+            </template>
+            <template #avatar>
+              <Avatar :src="item.ava" />
+            </template>
+          </ListItemMeta>
+        </Skeleton>
+      </ListItem>
+    </template>
+  </List>
 </template>
 <script lang="ts" setup>
+import { request } from "@/api/axiosInstance";
+import { Avatar, List, ListItem, ListItemMeta, Skeleton } from "ant-design-vue";
+import { ref } from "vue";
 import "../../assets/css/Dashboard.css";
+
+let listUser = ref();
+// getListUser();
+
+function getListUser() {
+  return request({
+    url: "/users",
+    method: "GET",
+    params: {
+      limit: 1000,
+    },
+  }).then((response) => {
+    listUser.value = response.data;
+  });
+}
 </script>
+<style scoped>
+.demo-loadmore-list {
+  min-height: 350px;
+}
+</style>

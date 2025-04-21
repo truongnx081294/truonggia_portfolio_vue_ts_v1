@@ -30,7 +30,6 @@ export const Featured: Array<IFeatured> = [
   },
 ];
 
-
 export const ArchiveProjects: Array<IArchiveProjects> = [
   {
     name: "data-structures-and-algorithms",

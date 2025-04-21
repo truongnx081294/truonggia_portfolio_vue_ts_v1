@@ -25,9 +25,9 @@
 
       <div className="right">
         <div>
-          <Link href="mailto:phyf3script@gmail.com" target="blank">
-            Truongnx081294@gmail.com
-          </Link>
+          <a href="mailto:truongnx081294@gmail.com" target="blank">
+            truongnx081294@gmail.com
+          </a>
         </div>
       </div>
     </main>
@@ -36,8 +36,8 @@
       <p>
         Inspired by
         <span
-          ><Link href="https://brittanychiang.com"
-            >brittanychiang.com</Link
+          ><a href="https://tonytruong.id.vn"
+            >tonytruong.id.vn</a
           ></span
         >
       </p>

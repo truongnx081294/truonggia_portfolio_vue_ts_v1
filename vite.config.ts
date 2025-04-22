@@ -7,9 +7,9 @@ import { AntDesignVueResolver } from "unplugin-vue-components/resolvers";
 
 // https://vite.dev/config/
 export default defineConfig({
-  build: {
-    target: "esnext", // hoặc 'esnext', 'modules', v.v.
-  },
+  // build: {
+  //   target: "esnext", // hoặc 'esnext', 'modules', v.v.
+  // },
   server: {
     allowedHosts: ["tonytruong.id.vn", "localhost", "127.0.0.1"],
   },

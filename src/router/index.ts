@@ -68,10 +68,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  //   if (!to.meta.requiresAuth) {
-  next();
-  //     return;
-  //   } else {
+  if (!to.meta.requiresAuth) {
+    console.log(from);
+    next();
+    return;
+  } else {
+    next();
+  }
   //     const authStore = useAuthStore();
   //     const isLogin = authStore.initialState.isLogin;
   //     if (!isLogin || !getToken() || getToken() == "") {

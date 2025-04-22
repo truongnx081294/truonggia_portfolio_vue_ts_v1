@@ -21,7 +21,6 @@
   </List>
 </template>
 <script lang="ts" setup>
-import { request } from "@/api/axiosInstance";
 import { Avatar, List, ListItem, ListItemMeta, Skeleton } from "ant-design-vue";
 import { ref } from "vue";
 import "../../assets/css/Dashboard.css";
@@ -29,17 +28,17 @@ import "../../assets/css/Dashboard.css";
 let listUser = ref();
 // getListUser();
 
-function getListUser() {
-  return request({
-    url: "/users",
-    method: "GET",
-    params: {
-      limit: 1000,
-    },
-  }).then((response) => {
-    listUser.value = response.data;
-  });
-}
+// function getListUser() {
+//   return request({
+//     url: "/users",
+//     method: "GET",
+//     params: {
+//       limit: 1000,
+//     },
+//   }).then((response) => {
+//     listUser.value = response.data;
+//   });
+// }
 </script>
 <style scoped>
 .demo-loadmore-list {

@@ -45,8 +45,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import ContactIcons from "@/components/ContactIconsComponent.vue";
-import Intro from "@/components/IntroductionsComponent.vue";
 import About from "@/components/AboutComponent.vue";
+import ContactIcons from "@/components/ContactIconsComponent.vue";
 import Projects from "@/components/ProjectsComponent.vue";
 </script>

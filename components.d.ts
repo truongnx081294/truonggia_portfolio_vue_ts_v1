@@ -8,21 +8,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AAvatar: typeof import('ant-design-vue/es')['Avatar']
     AboutComponent: typeof import('./src/components/AboutComponent.vue')['default']
-    ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
-    ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
-    ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
-    AForm: typeof import('ant-design-vue/es')['Form']
-    AFormItem: typeof import('ant-design-vue/es')['FormItem']
-    AInput: typeof import('ant-design-vue/es')['Input']
-    AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
-    AListItemMeta: typeof import('ant-design-vue/es')['ListItemMeta']
-    AModal: typeof import('ant-design-vue/es')['Modal']
     ArchiveCardComponent: typeof import('./src/components/ArchiveCardComponent.vue')['default']
-    ASkeleton: typeof import('ant-design-vue/es')['Skeleton']
-    AUpload: typeof import('ant-design-vue/es')['Upload']
     ContactIconsComponent: typeof import('./src/components/ContactIconsComponent.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IntroductionsComponent: typeof import('./src/components/IntroductionsComponent.vue')['default']

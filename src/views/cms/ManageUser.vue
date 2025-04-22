@@ -205,7 +205,7 @@ const showModal = () => {
   open.value = true;
 };
 
-const handleOk = (e: MouseEvent) => {
+const handleOk = () => {
   addAccount(formState);
   open.value = false;
 };
@@ -220,7 +220,7 @@ const addAccount = (data: FormState) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        const openNoti = openNotification(
+        openNotification(
           "bottomLeft",
           "Thêm tài khoản",
           result.data
@@ -268,7 +268,7 @@ const confirm = (id: number) => {
   deleteAccount(id);
 };
 
-const cancel = (e: MouseEvent) => {
+const cancel = () => {
   openNotification("bottomLeft", "Xóa tài khoản", "Hủy xóa thành công");
 };
 </script>

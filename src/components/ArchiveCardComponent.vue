@@ -5,14 +5,14 @@ import ProjectDivComponent from "./ProjectDivComponent.vue";
 
 // const loadFeatures = () => import("./features.js").then((res) => res.default);
 
-interface IArchive {
-  category?: string;
-  name: string;
-  details?: string;
-  id: number;
-  gitlink?: URL;
-  livelink?: URL;
-}
+// interface IArchive {
+//   category?: string;
+//   name: string;
+//   details?: string;
+//   id: number;
+//   gitlink?: URL;
+//   livelink?: URL;
+// }
 </script>
 
 <template>

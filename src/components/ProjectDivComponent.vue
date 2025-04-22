@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { motion } from "motion-v";
-
 defineProps(["project"]);
 
 // const controls = useAnimation()
@@ -19,10 +17,10 @@ const container = {
     },
   },
 };
-const items = {
-  hidden: { opacity: 0, x: 50 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-};
+// const items = {
+//   hidden: { opacity: 0, x: 50 },
+//   show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+// };
 
 // useEffect(() => {
 //     if(inView) {
@@ -32,7 +30,7 @@ const items = {
 </script>
 
 <template>
-  <motion.section
+  <section
     className="{styles.archive}"
     animate="show"
     initial="hidden"
@@ -78,5 +76,5 @@ const items = {
         </a>
       </div>
     </div>
-  </motion.section>
+  </section>
 </template>

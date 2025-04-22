@@ -17,6 +17,8 @@ export const setCookie = (
     }
   }
 
+  console.log(expires);
+
   return { cookies };
   // document.cookie = name + '=' + (value || '') + expires + '; path=/';
   cookies.set(name, value);

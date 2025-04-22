@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { Featured } from "./data";
-import "../assets/css/Home.css";
-import ProjectDivComponent from "@/components/ProjectDivComponent.vue";
 import { request } from "@/api/axiosInstance";
 import { ref } from "vue";
+import "../assets/css/Home.css";
 
 const listProject = ref();
 getListProject();
@@ -26,10 +24,10 @@ function getListProject() {
 
 <template>
   <div className="container">
-    <!-- <ProjectDivComponent
+    <ProjectDivComponent
       v-for="(project, index) in listProject"
       :key="index"
       :project="project"
-    /> -->
+    />
   </div>
 </template>

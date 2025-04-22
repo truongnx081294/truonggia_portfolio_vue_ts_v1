@@ -7,6 +7,9 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    target: 'esnext', // hoặc 'esnext', 'modules', v.v.
+  },
   plugins: [vue(),
     Components({
       dts: true,

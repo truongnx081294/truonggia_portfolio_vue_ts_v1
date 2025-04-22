@@ -25,13 +25,12 @@ import {
   LayoutContent,
   LayoutSider
 } from "ant-design-vue";
-import { reactive, type CSSProperties } from "vue";
-import { useRoute } from "vue-router";
+import { type CSSProperties } from "vue";
 import "../assets/css/Dashboard.css";
 
-const path = useRoute();
+// const path = useRoute();
 
-const listRoute = reactive<string[]>(path.fullPath.split("/"));
+// const listRoute = reactive<string[]>(path.fullPath.split("/"));
 
 const siderStyle: CSSProperties = {
   textAlign: "center",

@@ -19,12 +19,12 @@
   >
     <template #bodyCell="{ column, text, record }">
       <template
-        v-if="['name', 'description', 'type'].includes(column.dataIndex)"
+        v-if="['name', 'description', 'type'].includes(column.dataIndex as string)"
       >
         <div>
           <Input
             v-if="editableData[record.id]"
-            v-model:value="editableData[record.id][column.dataIndex]"
+            v-model:value="editableData[record.id][column.dataIndex  as keyof FormSkillState]"
             style="margin: -5px 0"
           />
           <template v-else>
@@ -216,7 +216,7 @@ const showModal = () => {
   open.value = true;
 };
 
-const handleOk = (e: MouseEvent) => {
+const handleOk = () => {
   addSkill(formSkillState);
   open.value = false;
 };

@@ -19,12 +19,12 @@
   >
     <template #bodyCell="{ column, text, record }">
       <template
-        v-if="['name', 'description', 'type'].includes(column.dataIndex)"
+        v-if="['name', 'description', 'type'].includes(column.dataIndex as string)"
       >
         <div>
           <Input
             v-if="editableData[record.id]"
-            v-model:value="editableData[record.id][column.dataIndex]"
+            v-model:value="editableData[record.id][column.dataIndex  as keyof FormProjectState]"
             style="margin: -5px 0"
           />
           <template v-else>
@@ -141,7 +141,14 @@ import "../../assets/css/Dashboard.css";
 
 import { notification, type NotificationPlacement } from "ant-design-vue";
 
-const columns = [
+type ColumnItem = {
+  title: string;
+  dataIndex: string;
+  key: string;
+  sorter?: boolean;
+};
+
+const columns: ColumnItem[] = [
   {
     title: "Name",
     dataIndex: "name",
@@ -216,7 +223,7 @@ const showModal = () => {
   open.value = true;
 };
 
-const handleOk = (e: MouseEvent) => {
+const handleOk = () => {
   addProject(formProjectState);
   open.value = false;
 };

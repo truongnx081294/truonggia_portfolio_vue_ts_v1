@@ -1,41 +1,9 @@
 <script setup lang="ts">
 defineProps(["project"]);
-
-// const controls = useAnimation()
-// const [ref, inView] = useInView({
-//     threshold:0.3
-// })
-const container = {
-  hidden: { opacity: 0, x: -50 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.7,
-      staggerChildren: 0.3,
-      delayChildren: 0.2,
-    },
-  },
-};
-// const items = {
-//   hidden: { opacity: 0, x: 50 },
-//   show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-// };
-
-// useEffect(() => {
-//     if(inView) {
-//         controls.start('show')
-//     }
-// }, [controls, inView])
 </script>
 
 <template>
-  <section
-    className="{styles.archive}"
-    animate="show"
-    initial="hidden"
-    :variants="container"
-  >
+  <section className="{styles.archive}" animate="show" initial="hidden">
     <div>
       <span>{{ project.type }}</span>
       <h3 v-if="project.livelink">

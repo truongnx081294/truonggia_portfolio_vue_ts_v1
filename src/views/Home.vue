@@ -10,7 +10,7 @@
       </div>
 
       <div className="content">
-        <!-- <Intro /> -->
+        <Intro />
         <About />
         <Projects />
 
@@ -46,6 +46,7 @@
 </template>
 <script setup lang="ts">
 import About from "@/components/AboutComponent.vue";
+import Intro from "@/components/IntroductionsComponent.vue";
 import ContactIcons from "@/components/ContactIconsComponent.vue";
 import Projects from "@/components/ProjectsComponent.vue";
 </script>

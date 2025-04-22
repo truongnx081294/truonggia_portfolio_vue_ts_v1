@@ -2,6 +2,7 @@
 import { request } from "@/api/axiosInstance";
 import { ref } from "vue";
 import "../assets/css/Home.css";
+import ProjectDivComponent from "./ProjectDivComponent.vue";
 
 const listProject = ref();
 getListProject();
@@ -9,7 +10,7 @@ getListProject();
 function getListProject() {
   request({
     method: "GET",
-    url: "/projects",
+    url: "/projects/list",
   })
     .then((res) => {
       if (res.status === 200) {

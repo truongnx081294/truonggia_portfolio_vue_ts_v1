@@ -32,7 +32,7 @@
 
     <footer>
       <p>
-        Inspired by
+        Powered by
         <span><a href="https://tonytruong.id.vn">tonytruong.id.vn</a></span>
       </p>
     </footer>

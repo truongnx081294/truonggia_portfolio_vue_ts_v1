@@ -1,6 +1,6 @@
 <template>
-  <div style="width: 50%; margin: 200px auto;" >
-    <h2 style=" text-align: center;">Đăng nhập</h2>
+  <div style="width: 50%; margin: 200px auto">
+    <h2 style="text-align: center">Đăng nhập</h2>
     <Form
       :model="formState"
       name="basic"
@@ -37,11 +37,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { request } from "@/api/axiosInstance";
-import router from "@/router";
-import { Form, FormItem, Input, InputPassword } from "ant-design-vue";
-import { reactive } from "vue";
-import "../../assets/css/Login.css";
+import { request } from '@/api/axiosInstance';
+import router from '@/router';
+import { Form, FormItem, Input, InputPassword } from 'ant-design-vue';
+import { reactive } from 'vue';
+import '../../assets/css/Login.css';
 
 interface FormState {
   username: string;
@@ -50,8 +50,8 @@ interface FormState {
 }
 
 const formState = reactive<FormState>({
-  username: "",
-  password: "",
+  username: '',
+  password: '',
   // remember: true,
 });
 
@@ -60,13 +60,13 @@ const onFinish = (values: any) => {
 };
 
 const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
+  console.log('Failed:', errorInfo);
 };
 
 const login = (data: FormState) => {
   request({
-    method: "POST",
-    url: "/authentication/login",
+    method: 'POST',
+    url: '/authentication/login',
     data: {
       data,
     },
@@ -74,8 +74,8 @@ const login = (data: FormState) => {
     .then((res) => {
       if (res.status == 200) {
         let userInfo = res.data;
-        localStorage.setItem("userToken", userInfo.token);
-        router.replace("/cms/dashboard");
+        localStorage.setItem('userToken', userInfo.token);
+        router.replace('/cms/dashboard');
       }
     })
     .catch((err) => {

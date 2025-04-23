@@ -1,30 +1,15 @@
 <template>
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      padding: 0px 16px 24px;
-    "
-  >
-    <Button type="primary" :icon="h(PlusOutlined)" @click="showModal"
-      >Tạo mới</Button
-    >
+  <div style="display: flex; justify-content: space-between; padding: 0px 16px 24px">
+    <Button type="primary" :icon="h(PlusOutlined)" @click="showModal">Tạo mới</Button>
   </div>
 
-  <Table
-    :data-source="listSkill"
-    :columns="columns"
-    :loading="isLoading"
-    bordered
-  >
+  <Table :data-source="listSkill" :columns="columns" :loading="isLoading" bordered>
     <template #bodyCell="{ column, text, record }">
-      <template
-        v-if="['name', 'description', 'type'].includes(column.dataIndex as string)"
-      >
+      <template v-if="['name', 'description', 'type'].includes(column.dataIndex as string)">
         <div>
           <Input
             v-if="editableData[record.id]"
-            v-model:value="editableData[record.id][column.dataIndex  as keyof FormSkillState]"
+            v-model:value="editableData[record.id][column.dataIndex as keyof FormSkillState]"
             style="margin: -5px 0"
           />
           <template v-else>
@@ -34,12 +19,7 @@
       </template>
       <template v-if="column.key === 'action'">
         <div v-if="editableData[record.id]">
-          <Button
-            type="primary"
-            :icon="h(SaveOutlined)"
-            @click="saveSkill(record.id)"
-            >Save</Button
-          >
+          <Button type="primary" :icon="h(SaveOutlined)" @click="saveSkill(record.id)">Save</Button>
           <Popconfirm
             title="Are you sure cancel edit project?"
             ok-text="Yes"
@@ -50,12 +30,7 @@
           </Popconfirm>
         </div>
         <div v-else>
-          <Button
-            type="primary"
-            :icon="h(EditOutlined)"
-            @click="editSkill(record.id)"
-            >Edit</Button
-          >
+          <Button type="primary" :icon="h(EditOutlined)" @click="editSkill(record.id)">Edit</Button>
         </div>
         <Popconfirm
           title="Are you sure delete this project?"
@@ -82,9 +57,7 @@
       <FormItem
         label="Tên"
         name="name"
-        :rules="[
-          { required: true, message: 'Please input your project \'s name!' },
-        ]"
+        :rules="[{ required: true, message: 'Please input your project \'s name!' }]"
       >
         <Input v-model:value="formSkillState.name" />
       </FormItem>
@@ -105,9 +78,7 @@
       <FormItem
         label="Loại"
         name="type"
-        :rules="[
-          { required: true, message: 'Please input your project \'s type!' },
-        ]"
+        :rules="[{ required: true, message: 'Please input your project \'s type!' }]"
       >
         <Input v-model:value="formSkillState.type" />
       </FormItem>
@@ -117,58 +88,50 @@
   <contextHolder />
 </template>
 <script lang="ts" setup>
-import { request } from "@/api/axiosInstance";
+import { request } from '@/api/axiosInstance';
 import {
   CloseOutlined,
   DeleteOutlined,
   EditOutlined,
   PlusOutlined,
   SaveOutlined,
-} from "@ant-design/icons-vue";
+} from '@ant-design/icons-vue';
 
-import {
-  Button,
-  Form,
-  FormItem,
-  Input,
-  Modal,
-  Popconfirm,
-  Table,
-} from "ant-design-vue";
-import { cloneDeep } from "lodash-es";
-import { h, reactive, ref, type UnwrapRef } from "vue";
-import "../../assets/css/Dashboard.css";
+import { Button, Form, FormItem, Input, Modal, Popconfirm, Table } from 'ant-design-vue';
+import { cloneDeep } from 'lodash-es';
+import { h, reactive, ref, type UnwrapRef } from 'vue';
+import '../../assets/css/Dashboard.css';
 
-import { notification, type NotificationPlacement } from "ant-design-vue";
+import { notification, type NotificationPlacement } from 'ant-design-vue';
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
     sorter: true,
   },
   {
-    title: "Description",
-    dataIndex: "description",
-    key: "description",
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
     sorter: true,
   },
   {
-    title: "Type",
-    dataIndex: "type",
-    key: "type",
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
     sorter: true,
   },
   {
-    title: "Ngày tạo",
-    dataIndex: "created_at",
-    key: "created_at",
+    title: 'Ngày tạo',
+    dataIndex: 'created_at',
+    key: 'created_at',
   },
   {
-    title: "Action",
-    dataIndex: "id",
-    key: "action",
+    title: 'Action',
+    dataIndex: 'id',
+    key: 'action',
   },
 ];
 
@@ -180,8 +143,8 @@ getListSkill();
 function getListSkill() {
   isLoading.value = true;
   request({
-    url: "/skills",
-    method: "GET",
+    url: '/skills',
+    method: 'GET',
     params: {
       limit: 1000,
     },
@@ -205,9 +168,9 @@ interface FormSkillState {
 }
 
 const formSkillState = reactive<FormSkillState>({
-  name: "",
-  description: "",
-  type: "",
+  name: '',
+  description: '',
+  type: '',
 });
 
 const open = ref<boolean>(false);
@@ -223,15 +186,15 @@ const handleOk = () => {
 
 const addSkill = (data: FormSkillState) => {
   request({
-    url: "/skills",
-    method: "POST",
+    url: '/skills',
+    method: 'POST',
     data: {
       data,
     },
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification("bottomLeft", "Thêm kỹ năng", result.data);
+        openNotification('bottomLeft', 'Thêm kỹ năng', result.data);
         getListSkill();
       }
     })
@@ -245,29 +208,29 @@ const editableData: UnwrapRef<Record<string, FormSkillState>> = reactive({});
 
 const editSkill = (id: number) => {
   editableData[id] = cloneDeep(
-    dataSource.value.filter((item: FormSkillState) => id === item.id)[0]
+    dataSource.value.filter((item: FormSkillState) => id === item.id)[0],
   );
 };
 
 const saveSkill = (id: number) => {
   Object.assign(
     dataSource.value.filter((item: FormSkillState) => id === item.id)[0],
-    editableData[id]
+    editableData[id],
   );
 
   request({
-    url: "/skills",
-    method: "PUT",
+    url: '/skills',
+    method: 'PUT',
     data: {
       data: editableData[id],
     },
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification("bottomLeft", "Sửa kỹ năng", result.data);
+        openNotification('bottomLeft', 'Sửa kỹ năng', result.data);
         delete editableData[id];
       } else {
-        openNotification("bottomLeft", "Sửa kỹ năng", result.data);
+        openNotification('bottomLeft', 'Sửa kỹ năng', result.data);
       }
     })
     .catch((err) => {
@@ -281,15 +244,15 @@ const cancelEditSkill = (id: number) => {
 
 const deleteSkill = (id: number) => {
   request({
-    url: "/skills",
-    method: "DELETE",
+    url: '/skills',
+    method: 'DELETE',
     data: {
       id,
     },
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification("bottomLeft", "Xóa kỹ năng", result.data);
+        openNotification('bottomLeft', 'Xóa kỹ năng', result.data);
       }
     })
     .catch((err) => {
@@ -299,11 +262,7 @@ const deleteSkill = (id: number) => {
 
 const [api, contextHolder] = notification.useNotification();
 
-const openNotification = (
-  placement: NotificationPlacement,
-  title: string,
-  content: string
-) => {
+const openNotification = (placement: NotificationPlacement, title: string, content: string) => {
   api.info({
     message: title,
     description: content,
@@ -316,6 +275,6 @@ const confirm = (id: number) => {
 };
 
 const cancel = () => {
-  openNotification("bottomLeft", "Xóa kỹ năng", "Hủy xóa thành công");
+  openNotification('bottomLeft', 'Xóa kỹ năng', 'Hủy xóa thành công');
 };
 </script>

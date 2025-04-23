@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps(["project"]);
+defineProps(['project']);
 </script>
 
 <template>
@@ -18,29 +18,11 @@ defineProps(["project"]);
       </h3>
       <p>{{ project.description }}</p>
       <div className="icon">
-        <a
-          v-if="project?.gitlink?.href"
-          :href="`${project?.gitlink?.href}`"
-          target="blank"
-        >
-          <img
-            src="../assets/images/github.svg"
-            alt="github"
-            :width="20"
-            :height="20"
-          />
+        <a v-if="project?.gitlink?.href" :href="`${project?.gitlink?.href}`" target="blank">
+          <img src="../assets/images/github.svg" alt="github" :width="20" :height="20" />
         </a>
-        <a
-          v-if="project?.livelink?.href"
-          :href="`${project?.livelink?.href}`"
-          target="blank"
-        >
-          <img
-            src="../assets/images/share.svg"
-            alt="github"
-            layout="fill"
-            className="share"
-          />
+        <a v-if="project?.livelink?.href" :href="`${project?.livelink?.href}`" target="blank">
+          <img src="../assets/images/share.svg" alt="github" layout="fill" className="share" />
         </a>
       </div>
     </div>

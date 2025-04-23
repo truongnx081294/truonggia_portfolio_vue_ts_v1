@@ -12,25 +12,25 @@
   <Button danger :icon="h(LogoutOutlined)" @click="Logout">Logout</Button>
 </template>
 <script lang="ts" setup>
-import router from "@/router";
+import router from '@/router';
 import {
   HomeOutlined,
   LogoutOutlined,
   ProjectOutlined,
   ToolOutlined,
   UserOutlined,
-} from "@ant-design/icons-vue";
-import type { ItemType, MenuProps } from "ant-design-vue";
-import { Button, Menu } from "ant-design-vue";
-import { VueElement, h, reactive, ref } from "vue";
-import "../assets/css/Dashboard.css";
+} from '@ant-design/icons-vue';
+import type { ItemType, MenuProps } from 'ant-design-vue';
+import { Button, Menu } from 'ant-design-vue';
+import { VueElement, h, reactive, ref } from 'vue';
+import '../assets/css/Dashboard.css';
 
 function getItem(
   label: VueElement | string,
   key: string,
   icon?: any,
   children?: ItemType[],
-  type?: "group"
+  type?: 'group',
 ): ItemType {
   return {
     key,
@@ -41,29 +41,29 @@ function getItem(
   } as ItemType;
 }
 
-const selectedKeys = ref<string[]>(["1"]);
-const openKeys = ref<string[]>(["sub1"]);
+const selectedKeys = ref<string[]>(['1']);
+const openKeys = ref<string[]>(['sub1']);
 
 const items: ItemType[] = reactive([
-  getItem("Go to Website", "home", () => h(HomeOutlined)),
+  getItem('Go to Website', 'home', () => h(HomeOutlined)),
 
-  getItem("Trang chủ", "dashboard", () => h(HomeOutlined)),
+  getItem('Trang chủ', 'dashboard', () => h(HomeOutlined)),
 
-  getItem("Skill", "skill", () => h(ToolOutlined)),
+  getItem('Skill', 'skill', () => h(ToolOutlined)),
 
-  getItem("Project", "project", () => h(ProjectOutlined)),
+  getItem('Project', 'project', () => h(ProjectOutlined)),
 
-  { type: "divider" },
+  { type: 'divider' },
 
-  getItem("Tài khoản", "user", () => h(UserOutlined)),
+  getItem('Tài khoản', 'user', () => h(UserOutlined)),
 ]);
 
-const handleClick: MenuProps["onClick"] = (e) => {
+const handleClick: MenuProps['onClick'] = (e) => {
   router.replace(`/cms/${e.key}`);
 };
 
 function Logout() {
-  localStorage.removeItem("userToken");
+  localStorage.removeItem('userToken');
   router.replace(`/login`);
 }
 </script>

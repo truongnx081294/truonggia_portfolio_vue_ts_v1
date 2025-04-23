@@ -1,30 +1,15 @@
 <template>
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      padding: 0px 16px 24px;
-    "
-  >
-    <Button type="primary" :icon="h(PlusOutlined)" @click="showModal"
-      >Tạo mới</Button
-    >
+  <div style="display: flex; justify-content: space-between; padding: 0px 16px 24px">
+    <Button type="primary" :icon="h(PlusOutlined)" @click="showModal">Tạo mới</Button>
   </div>
 
-  <Table
-    :data-source="listProject"
-    :columns="columns"
-    :loading="isLoading"
-    bordered
-  >
+  <Table :data-source="listProject" :columns="columns" :loading="isLoading" bordered>
     <template #bodyCell="{ column, text, record }">
-      <template
-        v-if="['name', 'description', 'type'].includes(column.dataIndex as string)"
-      >
+      <template v-if="['name', 'description', 'type'].includes(column.dataIndex as string)">
         <div>
           <Input
             v-if="editableData[record.id]"
-            v-model:value="editableData[record.id][column.dataIndex  as keyof FormProjectState]"
+            v-model:value="editableData[record.id][column.dataIndex as keyof FormProjectState]"
             style="margin: -5px 0"
           />
           <template v-else>
@@ -34,10 +19,7 @@
       </template>
       <template v-if="column.key === 'action'">
         <div v-if="editableData[record.id]">
-          <Button
-            type="primary"
-            :icon="h(SaveOutlined)"
-            @click="saveProject(record.id)"
+          <Button type="primary" :icon="h(SaveOutlined)" @click="saveProject(record.id)"
             >Save</Button
           >
           <Popconfirm
@@ -50,10 +32,7 @@
           </Popconfirm>
         </div>
         <div v-else>
-          <Button
-            type="primary"
-            :icon="h(EditOutlined)"
-            @click="editProject(record.id)"
+          <Button type="primary" :icon="h(EditOutlined)" @click="editProject(record.id)"
             >Edit</Button
           >
         </div>
@@ -82,9 +61,7 @@
       <FormItem
         label="Tên"
         name="name"
-        :rules="[
-          { required: true, message: 'Please input your project \'s name!' },
-        ]"
+        :rules="[{ required: true, message: 'Please input your project \'s name!' }]"
       >
         <Input v-model:value="formProjectState.name" />
       </FormItem>
@@ -105,9 +82,7 @@
       <FormItem
         label="Loại"
         name="type"
-        :rules="[
-          { required: true, message: 'Please input your project \'s type!' },
-        ]"
+        :rules="[{ required: true, message: 'Please input your project \'s type!' }]"
       >
         <Input v-model:value="formProjectState.type" />
       </FormItem>
@@ -117,29 +92,21 @@
   <contextHolder />
 </template>
 <script lang="ts" setup>
-import { request } from "@/api/axiosInstance";
+import { request } from '@/api/axiosInstance';
 import {
   CloseOutlined,
   DeleteOutlined,
   EditOutlined,
   PlusOutlined,
   SaveOutlined,
-} from "@ant-design/icons-vue";
+} from '@ant-design/icons-vue';
 
-import {
-  Button,
-  Form,
-  FormItem,
-  Input,
-  Modal,
-  Popconfirm,
-  Table,
-} from "ant-design-vue";
-import { cloneDeep } from "lodash-es";
-import { h, reactive, ref, type UnwrapRef } from "vue";
-import "../../assets/css/Dashboard.css";
+import { Button, Form, FormItem, Input, Modal, Popconfirm, Table } from 'ant-design-vue';
+import { cloneDeep } from 'lodash-es';
+import { h, reactive, ref, type UnwrapRef } from 'vue';
+import '../../assets/css/Dashboard.css';
 
-import { notification, type NotificationPlacement } from "ant-design-vue";
+import { notification, type NotificationPlacement } from 'ant-design-vue';
 
 type ColumnItem = {
   title: string;
@@ -150,32 +117,32 @@ type ColumnItem = {
 
 const columns: ColumnItem[] = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
     sorter: true,
   },
   {
-    title: "Description",
-    dataIndex: "description",
-    key: "description",
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
     sorter: true,
   },
   {
-    title: "Type",
-    dataIndex: "type",
-    key: "type",
+    title: 'Type',
+    dataIndex: 'type',
+    key: 'type',
     sorter: true,
   },
   {
-    title: "Ngày tạo",
-    dataIndex: "created_at",
-    key: "created_at",
+    title: 'Ngày tạo',
+    dataIndex: 'created_at',
+    key: 'created_at',
   },
   {
-    title: "Action",
-    dataIndex: "id",
-    key: "action",
+    title: 'Action',
+    dataIndex: 'id',
+    key: 'action',
   },
 ];
 
@@ -187,8 +154,8 @@ getListProject();
 function getListProject() {
   isLoading.value = true;
   request({
-    url: "/projects",
-    method: "GET",
+    url: '/projects',
+    method: 'GET',
     params: {
       limit: 1000,
     },
@@ -212,9 +179,9 @@ interface FormProjectState {
 }
 
 const formProjectState = reactive<FormProjectState>({
-  name: "",
-  description: "",
-  type: "",
+  name: '',
+  description: '',
+  type: '',
 });
 
 const open = ref<boolean>(false);
@@ -230,15 +197,15 @@ const handleOk = () => {
 
 const addProject = (data: FormProjectState) => {
   request({
-    url: "/projects",
-    method: "POST",
+    url: '/projects',
+    method: 'POST',
     data: {
       data,
     },
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification("bottomLeft", "Thêm dự án", result.data);
+        openNotification('bottomLeft', 'Thêm dự án', result.data);
         getListProject();
       }
     })
@@ -252,29 +219,29 @@ const editableData: UnwrapRef<Record<string, FormProjectState>> = reactive({});
 
 const editProject = (id: number) => {
   editableData[id] = cloneDeep(
-    dataSource.value.filter((item: FormProjectState) => id === item.id)[0]
+    dataSource.value.filter((item: FormProjectState) => id === item.id)[0],
   );
 };
 
 const saveProject = (id: number) => {
   Object.assign(
     dataSource.value.filter((item: FormProjectState) => id === item.id)[0],
-    editableData[id]
+    editableData[id],
   );
 
   request({
-    url: "/projects",
-    method: "PUT",
+    url: '/projects',
+    method: 'PUT',
     data: {
       data: editableData[id],
     },
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification("bottomLeft", "Sửa dự án", result.data);
+        openNotification('bottomLeft', 'Sửa dự án', result.data);
         delete editableData[id];
       } else {
-        openNotification("bottomLeft", "Sửa dự án", result.data);
+        openNotification('bottomLeft', 'Sửa dự án', result.data);
       }
     })
     .catch((err) => {
@@ -288,15 +255,15 @@ const cancelEditProject = (id: number) => {
 
 const deleteproject = (id: number) => {
   request({
-    url: "/projects",
-    method: "DELETE",
+    url: '/projects',
+    method: 'DELETE',
     data: {
       id,
     },
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification("bottomLeft", "Xóa dự án", result.data);
+        openNotification('bottomLeft', 'Xóa dự án', result.data);
       }
     })
     .catch((err) => {
@@ -306,11 +273,7 @@ const deleteproject = (id: number) => {
 
 const [api, contextHolder] = notification.useNotification();
 
-const openNotification = (
-  placement: NotificationPlacement,
-  title: string,
-  content: string
-) => {
+const openNotification = (placement: NotificationPlacement, title: string, content: string) => {
   api.info({
     message: title,
     description: content,
@@ -323,6 +286,6 @@ const confirm = (id: number) => {
 };
 
 const cancel = () => {
-  openNotification("bottomLeft", "Xóa dự án", "Hủy xóa thành công");
+  openNotification('bottomLeft', 'Xóa dự án', 'Hủy xóa thành công');
 };
 </script>

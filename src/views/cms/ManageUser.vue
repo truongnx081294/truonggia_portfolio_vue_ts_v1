@@ -1,14 +1,6 @@
 <template>
-  <div
-    style="
-      display: flex;
-      justify-content: space-between;
-      padding: 0px 16px 24px;
-    "
-  >
-    <Button type="primary" :icon="h(PlusOutlined)" @click="showModal"
-      >Tạo mới</Button
-    >
+  <div style="display: flex; justify-content: space-between; padding: 0px 16px 24px">
+    <Button type="primary" :icon="h(PlusOutlined)" @click="showModal">Tạo mới</Button>
   </div>
 
   <Table
@@ -17,7 +9,7 @@
     :data-source="listUser"
     :columns="columns"
     :loading="isLoading"
-    style="height: 100%;"
+    style="height: 100%"
     bordered
   >
     <template #bodyCell="{ column, text }">
@@ -96,7 +88,7 @@
   <contextHolder />
 </template>
 <script lang="ts" setup>
-import { request } from "@/api/axiosInstance";
+import { request } from '@/api/axiosInstance';
 import {
   Avatar,
   Button,
@@ -110,50 +102,46 @@ import {
   RadioGroup,
   Table,
   Upload,
-} from "ant-design-vue";
-import { h, reactive, ref } from "vue";
-import "../../assets/css/Dashboard.css";
-import {
-  DeleteOutlined,
-  EditOutlined,
-  PlusOutlined,
-} from "@ant-design/icons-vue";
+} from 'ant-design-vue';
+import { h, reactive, ref } from 'vue';
+import '../../assets/css/Dashboard.css';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons-vue';
 
-import { type NotificationPlacement, notification } from "ant-design-vue";
+import { type NotificationPlacement, notification } from 'ant-design-vue';
 
 const columns = [
   {
-    title: "Avatar",
-    dataIndex: "ava",
-    key: "ava",
+    title: 'Avatar',
+    dataIndex: 'ava',
+    key: 'ava',
   },
   {
-    title: "Name",
-    dataIndex: "username",
-    key: "username",
+    title: 'Name',
+    dataIndex: 'username',
+    key: 'username',
     sorter: true,
   },
   {
-    title: "Email",
-    dataIndex: "email",
-    key: "email",
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
     sorter: true,
   },
   {
-    title: "Role",
-    dataIndex: "role",
-    key: "role",
+    title: 'Role',
+    dataIndex: 'role',
+    key: 'role',
     sorter: true,
   },
   {
-    title: "Ngày tạo",
-    dataIndex: "created_at",
-    key: "created_at",
+    title: 'Ngày tạo',
+    dataIndex: 'created_at',
+    key: 'created_at',
   },
   {
-    title: "Action",
-    dataIndex: "id",
-    key: "action",
+    title: 'Action',
+    dataIndex: 'id',
+    key: 'action',
   },
 ];
 
@@ -162,12 +150,11 @@ const isLoading = ref<boolean>(false);
 
 getListUser();
 
-
 function getListUser() {
   isLoading.value = true;
   return request({
-    url: "/users",
-    method: "GET",
+    url: '/users',
+    method: 'GET',
     params: {
       limit: 1000,
     },
@@ -192,11 +179,11 @@ interface FormState {
 }
 
 const formState = reactive<FormState>({
-  email: "",
-  username: "",
-  password: "",
+  email: '',
+  username: '',
+  password: '',
   role: true,
-  avatar: "",
+  avatar: '',
 });
 
 const open = ref<boolean>(false);
@@ -212,19 +199,15 @@ const handleOk = () => {
 
 const addAccount = (data: FormState) => {
   request({
-    url: "/authentication/register",
-    method: "POST",
+    url: '/authentication/register',
+    method: 'POST',
     data: {
       data,
     },
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification(
-          "bottomLeft",
-          "Thêm tài khoản",
-          result.data
-        );
+        openNotification('bottomLeft', 'Thêm tài khoản', result.data);
       }
     })
     .catch((err) => {
@@ -234,15 +217,15 @@ const addAccount = (data: FormState) => {
 
 const deleteAccount = (id: number) => {
   request({
-    url: "/users",
-    method: "DELETE",
+    url: '/users',
+    method: 'DELETE',
     data: {
       id,
     },
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification("bottomLeft", "Xóa tài khoản", result.data);
+        openNotification('bottomLeft', 'Xóa tài khoản', result.data);
       }
     })
     .catch((err) => {
@@ -252,11 +235,7 @@ const deleteAccount = (id: number) => {
 
 const [api, contextHolder] = notification.useNotification();
 
-const openNotification = (
-  placement: NotificationPlacement,
-  title: string,
-  content: string
-) => {
+const openNotification = (placement: NotificationPlacement, title: string, content: string) => {
   api.info({
     message: title,
     description: content,
@@ -269,6 +248,6 @@ const confirm = (id: number) => {
 };
 
 const cancel = () => {
-  openNotification("bottomLeft", "Xóa tài khoản", "Hủy xóa thành công");
+  openNotification('bottomLeft', 'Xóa tài khoản', 'Hủy xóa thành công');
 };
 </script>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "../assets/css/Home.css";
+import '../assets/css/Home.css';
 </script>
 <template>
   <section id="about" className="about">

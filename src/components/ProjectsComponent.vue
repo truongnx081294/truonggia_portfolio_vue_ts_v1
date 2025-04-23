@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import "../assets/css/Home.css";
-import ProjectCard from "./ProjectCardsComponent.vue";
+import '../assets/css/Home.css';
+import ProjectCard from './ProjectCardsComponent.vue';
 </script>
 <template>
   <section id="projects" className="projects">

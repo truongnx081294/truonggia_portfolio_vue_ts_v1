@@ -25,9 +25,7 @@
 
       <div className="right">
         <div>
-          <a href="mailto:truongnx081294@gmail.com" target="blank">
-            truongnx081294@gmail.com
-          </a>
+          <a href="mailto:truongnx081294@gmail.com" target="blank"> truongnx081294@gmail.com </a>
         </div>
       </div>
     </main>
@@ -35,18 +33,14 @@
     <footer>
       <p>
         Inspired by
-        <span
-          ><a href="https://tonytruong.id.vn"
-            >tonytruong.id.vn</a
-          ></span
-        >
+        <span><a href="https://tonytruong.id.vn">tonytruong.id.vn</a></span>
       </p>
     </footer>
   </div>
 </template>
 <script setup lang="ts">
-import About from "@/components/AboutComponent.vue";
-import Intro from "@/components/IntroductionsComponent.vue";
-import ContactIcons from "@/components/ContactIconsComponent.vue";
-import Projects from "@/components/ProjectsComponent.vue";
+import About from '@/components/AboutComponent.vue';
+import Intro from '@/components/IntroductionsComponent.vue';
+import ContactIcons from '@/components/ContactIconsComponent.vue';
+import Projects from '@/components/ProjectsComponent.vue';
 </script>

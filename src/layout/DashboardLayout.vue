@@ -1,5 +1,5 @@
 <template>
-  <Layout style="height: 100%;">
+  <Layout style="height: 100%">
     <LayoutSider :style="siderStyle">
       <MenuDashboard />
     </LayoutSider>
@@ -19,24 +19,20 @@
   </Layout>
 </template>
 <script lang="ts" setup>
-import MenuDashboard from "@/components/MenuDashboard.vue";
-import {
-  Layout,
-  LayoutContent,
-  LayoutSider
-} from "ant-design-vue";
-import { type CSSProperties } from "vue";
-import "../assets/css/Dashboard.css";
+import MenuDashboard from '@/components/MenuDashboard.vue';
+import { Layout, LayoutContent, LayoutSider } from 'ant-design-vue';
+import { type CSSProperties } from 'vue';
+import '../assets/css/Dashboard.css';
 
 // const path = useRoute();
 
 // const listRoute = reactive<string[]>(path.fullPath.split("/"));
 
 const siderStyle: CSSProperties = {
-  textAlign: "center",
-  lineHeight: "120px",
-  color: "#fff",
-  backgroundColor: "#fff",
+  textAlign: 'center',
+  lineHeight: '120px',
+  color: '#fff',
+  backgroundColor: '#fff',
 };
 
 // let abc = reactive(ref([1, 2, 3]));

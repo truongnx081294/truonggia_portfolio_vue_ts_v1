@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import "../assets/css/Home.css";
-import { ArchiveProjects } from "./data";
-import ProjectDivComponent from "./ProjectDivComponent.vue";
+import '../assets/css/Home.css';
+import { ArchiveProjects } from './data';
+import ProjectDivComponent from './ProjectDivComponent.vue';
 
 // const loadFeatures = () => import("./features.js").then((res) => res.default);
 
@@ -17,10 +17,6 @@ import ProjectDivComponent from "./ProjectDivComponent.vue";
 
 <template>
   <div className="archive_container">
-    <ProjectDivComponent
-      v-for="project in ArchiveProjects"
-      :key="project.id"
-      :project="project"
-    />
+    <ProjectDivComponent v-for="project in ArchiveProjects" :key="project.id" :project="project" />
   </div>
 </template>

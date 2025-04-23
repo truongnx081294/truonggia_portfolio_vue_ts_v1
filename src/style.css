@@ -6,8 +6,8 @@ body {
   margin: 0;
   font-family: 'League Spartan', sans-serif;
   background-color: var(--bg);
-  color:var(--white);
-  font-size: 16px;;
+  color: var(--white);
+  font-size: 16px;
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
   height: 100vh;
@@ -23,12 +23,12 @@ a {
 }
 
 :root {
-  --bg : #171717;
-  --grey : #EDEDED;
-  --darkbrown : #444444;
-  --white : #ffff;
-  --red : #ff0947;
-  --lightbg:#55555551;
+  --bg: #171717;
+  --grey: #ededed;
+  --darkbrown: #444444;
+  --white: #ffff;
+  --red: #ff0947;
+  --lightbg: #55555551;
 }
 
 footer {

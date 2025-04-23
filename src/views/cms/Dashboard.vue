@@ -1,9 +1,5 @@
 <template>
-  <List
-    item-layout="vertical"
-    :data-source="listUser"
-    class="demo-loadmore-list"
-  >
+  <List item-layout="vertical" :data-source="listUser" class="demo-loadmore-list">
     <template #renderItem="{ item }">
       <ListItem>
         <Skeleton avatar :title="false" :loading="!!item.loading" active>
@@ -21,9 +17,9 @@
   </List>
 </template>
 <script lang="ts" setup>
-import { Avatar, List, ListItem, ListItemMeta, Skeleton } from "ant-design-vue";
-import { ref } from "vue";
-import "../../assets/css/Dashboard.css";
+import { Avatar, List, ListItem, ListItemMeta, Skeleton } from 'ant-design-vue';
+import { ref } from 'vue';
+import '../../assets/css/Dashboard.css';
 
 let listUser = ref();
 // getListUser();

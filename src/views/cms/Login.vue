@@ -73,7 +73,7 @@ const login = (data: FormState) => {
   })
     .then((res) => {
       if (res.status == 200) {
-        let userInfo = res.data;
+        const userInfo = res.data;
         localStorage.setItem('userToken', userInfo.token);
         router.replace('/cms/dashboard');
       }

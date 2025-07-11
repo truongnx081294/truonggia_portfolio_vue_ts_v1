@@ -30,6 +30,7 @@ const router = createRouter({
           component: () => import('../views/cms/Dashboard.vue'),
           meta: {
             layout: 'dashboard-layout',
+            requiresAuth: true,
           },
         },
         {
@@ -38,6 +39,7 @@ const router = createRouter({
           component: () => import('../views/cms/ManageSkill.vue'),
           meta: {
             layout: 'dashboard-layout',
+            requiresAuth: true,
           },
         },
         {
@@ -46,6 +48,7 @@ const router = createRouter({
           component: () => import('../views/cms/ManageProject.vue'),
           meta: {
             layout: 'dashboard-layout',
+            requiresAuth: true,
           },
         },
         {
@@ -54,6 +57,7 @@ const router = createRouter({
           component: () => import('../views/cms/ManageUser.vue'),
           meta: {
             layout: 'dashboard-layout',
+            requiresAuth: true,
           },
         },
         {
@@ -63,48 +67,55 @@ const router = createRouter({
         },
       ],
     },
-    { path: '/cms/:pathMatch(.*)*', redirect: '/cms/dashboard' },
+    { path: '/cms/:pathMatch(.*)*', redirect: 'Dashboard' },
+    { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
 });
 
 router.beforeEach((to, from, next) => {
   if (!to.meta.requiresAuth) {
-    console.log(from);
+    console.log(1);
+    if (to.name === 'Login') {
+      const token = localStorage.getItem('userToken');
+      if (token) {
+        next({ name: 'Dashboard' });
+      }
+    }
     next();
     return;
   } else {
-    next();
+    // const authStore = useAuthStore();
+    const token = localStorage.getItem('userToken');
+    console.log('🚀 ~ router.beforeEach ~ token:', token);
+    // const isLogin = authStore.initialState.isLogin;
+    if (!token || token == '') {
+      if (to.name !== 'Login') {
+        next({ name: 'Login' });
+        return;
+      }
+      next();
+      return;
+    } else {
+      // checkRefreshToken();
+      // const levels = to.meta.levels;
+      // const discountCodes = to.meta.discountCodes as UserDiscountCode[];
+      // const user = authStore.getUserAuth.user as UserState;
+      // const discountCode = user?.metadata?.discountCode;
+      // if (
+      //   discountCodes?.length &&
+      //   discountCode &&
+      //   !discountCodes.includes(discountCode)
+      // ) {
+      //   next({ name: "Dashboard" });
+      //   return;
+      // } else if (levels && user?.level === UserLevels.SPONSOR) {
+      //   next({ name: "Dashboard" });
+      //   return;
+      // }
+      next();
+      return;
+    }
   }
-  //     const authStore = useAuthStore();
-  //     const isLogin = authStore.initialState.isLogin;
-  //     if (!isLogin || !getToken() || getToken() == "") {
-  //       if (to.name !== "Login") {
-  //         next({ name: "Login" });
-  //         return;
-  //       }
-  //       next();
-  //       return;
-  //     } else {
-  //       checkRefreshToken();
-  //       const levels = to.meta.levels;
-  //       const discountCodes = to.meta.discountCodes as UserDiscountCode[];
-  //       const user = authStore.getUserAuth.user as UserState;
-  //       const discountCode = user?.metadata?.discountCode;
-  //       if (
-  //         discountCodes?.length &&
-  //         discountCode &&
-  //         !discountCodes.includes(discountCode)
-  //       ) {
-  //         next({ name: "Dashboard" });
-  //         return;
-  //       } else if (levels && user?.level === UserLevels.SPONSOR) {
-  //         next({ name: "Dashboard" });
-  //         return;
-  //       }
-  //       next();
-  //       return;
-  //     }
-  //   }
 });
 
 export default router;

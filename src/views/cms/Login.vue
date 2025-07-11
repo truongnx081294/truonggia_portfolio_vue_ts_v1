@@ -31,7 +31,7 @@
     </FormItem> -->
 
       <FormItem :wrapper-col="{ offset: 8, span: 16 }">
-        <a-button type="primary" html-type="submit">Submit</a-button>
+        <Button type="primary" html-type="submit">Đăng nhập</Button>
       </FormItem>
     </Form>
   </div>
@@ -39,7 +39,7 @@
 <script lang="ts" setup>
 import { request } from '@/api/axiosInstance';
 import router from '@/router';
-import { Form, FormItem, Input, InputPassword } from 'ant-design-vue';
+import { Button, Form, FormItem, Input, InputPassword } from 'ant-design-vue';
 import { reactive } from 'vue';
 import '../../assets/css/Login.css';
 

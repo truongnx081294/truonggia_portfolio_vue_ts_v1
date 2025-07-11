@@ -3,6 +3,9 @@ FROM node:18 AS build
 
 WORKDIR /app
 
+# Cài pnpm
+RUN npm install -g pnpm
+
 COPY package*.json ./
 RUN pnpm install
 

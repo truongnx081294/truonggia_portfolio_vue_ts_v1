@@ -148,7 +148,7 @@ const columns: ColumnItem[] = [
 
 const isLoading = ref<boolean>(false);
 
-let listProject = ref();
+const listProject = ref();
 getListProject();
 
 function getListProject() {

@@ -14,7 +14,7 @@ import ContactIcons from './ContactIconsComponent.vue';
       <p className="intro">
         I`m a <span>software developer</span> primarily focused on
         <span>frontend development</span> using web technology. Always open to learning new things
-        and currently exploring the decentralised web and MERN stack web development.
+        and enjoy solving problems, making things work better.
       </p>
       <p className="available"><span>👇🏾</span> Currently open to opportunities</p>
 

@@ -26,16 +26,18 @@
 
       <div className="right">
         <div>
-          <a href="mailto:truongnx081294@gmail.com" target="blank"> truongnx081294@gmail.com </a>
+          <!-- <a href="mailto:truongnx081294@gmail.com" target="blank"> truongnx081294@gmail.com </a> -->
         </div>
+
+        <div></div>
       </div>
     </main>
 
     <footer>
-      <p>
+      <!-- <p>
         Powered by
         <span><a href="https://tonytruong.id.vn">tonytruong.id.vn</a></span>
-      </p>
+      </p> -->
     </footer>
   </div>
 </template>

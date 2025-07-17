@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-  padding: 0 2rem;
+  padding: 0 1rem;
   position: relative;
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 .theme-switcher {
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
 }
 
 .theme-switcher .ant-switch {
@@ -55,7 +55,7 @@ body {
 }
 .introduction > h1 > span {
   font-size: 1.5rem;
-  color: white;
+  color: var(--header-color);
   font-weight: 400;
 }
 .introduction > h1 {
@@ -78,7 +78,7 @@ body {
 }
 .intro > span {
   text-decoration: underline;
-  color: #bfbfbf;
+  color: var(--red);
 }
 .available {
   display: flex;
@@ -123,10 +123,10 @@ body {
   font-size: 1.2rem;
   color: #fff;
   background: none;
-  border: 1px solid #c1c1c1ab;
+  border: 2px solid var(--red);
   color: white;
   padding: 0;
-  border-radius: 0.5rem;
+  border-radius: 8px;
 }
 
 .button__bestia .button__bg {
@@ -136,7 +136,7 @@ body {
   width: 100%;
   height: 100%;
   background: var(--bg);
-  border-radius: 0.5rem;
+  border-radius: 4px;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.1, 0, 0.3, 1);
 }
@@ -149,7 +149,7 @@ body {
 .button__bestia .button__bg::after {
   content: '';
   position: absolute;
-  background: white;
+  background: var(--red);
 }
 
 .button__bestia .button__bg::before {
@@ -361,6 +361,18 @@ body {
   display: none;
 }
 
+.contact ul li svg {
+  fill: var(--text-color);
+}
+
+.contact_intro ul li svg {
+  fill: var(--text-color);
+}
+
+.left ul li svg {
+  fill: var(--text-color);
+}
+
 @media screen and (min-width: 768px) {
   .container {
     padding: 0 2rem;
@@ -368,6 +380,9 @@ body {
   }
 }
 @media screen and (min-width: 1024px) {
+  .theme-switcher {
+    padding: 1rem 2rem;
+  }
   .mobile_header,
   .contact_intro {
     display: none;
@@ -467,10 +482,11 @@ body {
     display: flex;
   }
   .right {
-    margin-top: 30vh;
+    margin-top: 36vh;
     display: block;
     position: fixed;
     right: 0rem;
+    width: 10vw;
   }
   .right div:hover {
     color: var(--red);
@@ -502,14 +518,23 @@ body {
     transition: all 0.15s linear 0s;
   }
 
-  .left ul li svg {
-    fill: var(--text-color);
-  }
-
   .left div:nth-child(2) {
     width: 2px;
     height: 100vh;
     background-color: var(--red);
+  }
+
+  .right {
+    display: grid;
+    place-items: center;
+    align-items: center;
+  }
+
+  .right div:nth-child(2) {
+    width: 2px;
+    height: 100vh;
+    background-color: var(--red);
+    transform: rotate(-180deg);
   }
   .left ul li:hover {
     transform: scale(1.1) translateY(-15%);
@@ -625,4 +650,8 @@ body {
   .archive_container {
     padding: 2rem 1rem;
   }
+}
+
+footer {
+  min-height: 100px;
 }

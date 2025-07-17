@@ -1,5 +1,29 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import '../assets/css/Home.css';
+import { request } from '@/api/axiosInstance';
+import { TYPE_SKILL } from '@/helper/constant';
+
+const listSkill = ref();
+
+onMounted(() => {
+  getListSkill();
+});
+
+function getListSkill() {
+  request({
+    method: 'GET',
+    url: '/skills/list',
+  })
+    .then((res) => {
+      if (res.status === 200) {
+        listSkill.value = res.data.data;
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 </script>
 <template>
   <section id="about" className="about">
@@ -9,22 +33,22 @@ import '../assets/css/Home.css';
       <div>
         <h3>Core Technologies</h3>
         <ul>
-          <li>Html & CSS</li>
-          <li>Javascript (ES6+)</li>
-          <li>ReactJS</li>
-          <li>Solidity</li>
-          <li>Typescript</li>
-          <li>Next JS</li>
+          <li :key="index" v-for="(skill, index) in listSkill">
+            <template v-if="skill.type === TYPE_SKILL.CORE_TECHNOLOGY">
+              {{ skill.name }}
+            </template>
+          </li>
         </ul>
       </div>
 
       <div>
         <h3>Familiar With</h3>
         <ul>
-          <li>Node JS</li>
-          <li>Express</li>
-          <li>Mongodb</li>
-          <li>Unit Testing Solidity dapps</li>
+          <li :key="index" v-for="(skill, index) in listSkill">
+            <template v-if="skill.type === TYPE_SKILL.FAMILIAR">
+              {{ skill.name }}
+            </template>
+          </li>
         </ul>
       </div>
     </div>

@@ -161,7 +161,7 @@ function getListProject() {
     },
   })
     .then((response) => {
-      listProject.value = response.data;
+      listProject.value = response.data.data;
     })
     .catch((err) => {
       console.log(err);
@@ -205,7 +205,7 @@ const addProject = (data: FormProjectState) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification('bottomLeft', 'Thêm dự án', result.data);
+        openNotification('bottomLeft', 'Thêm dự án', result.data.message);
         getListProject();
       }
     })
@@ -238,10 +238,10 @@ const saveProject = (id: number) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification('bottomLeft', 'Sửa dự án', result.data);
+        openNotification('bottomLeft', 'Sửa dự án', result.data.message);
         delete editableData[id];
       } else {
-        openNotification('bottomLeft', 'Sửa dự án', result.data);
+        openNotification('bottomLeft', 'Sửa dự án', result.data.message);
       }
     })
     .catch((err) => {
@@ -263,7 +263,7 @@ const deleteproject = (id: number) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification('bottomLeft', 'Xóa dự án', result.data);
+        openNotification('bottomLeft', 'Xóa dự án', result.data.message);
       }
     })
     .catch((err) => {

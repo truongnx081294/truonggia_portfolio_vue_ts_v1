@@ -103,7 +103,7 @@ import {
   Table,
   Upload,
 } from 'ant-design-vue';
-import { h, reactive, ref } from 'vue';
+import { h, onMounted, reactive, ref } from 'vue';
 import '../../assets/css/Dashboard.css';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons-vue';
 
@@ -145,10 +145,12 @@ const columns = [
   },
 ];
 
-let listUser = ref();
+const listUser = ref();
 const isLoading = ref<boolean>(false);
 
-getListUser();
+onMounted(() => {
+  getListUser();
+});
 
 function getListUser() {
   isLoading.value = true;
@@ -160,7 +162,7 @@ function getListUser() {
     },
   })
     .then((response) => {
-      listUser.value = response.data;
+      listUser.value = response.data.data;
     })
     .catch((err) => {
       console.log(err);
@@ -207,7 +209,7 @@ const addAccount = (data: FormState) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification('bottomLeft', 'Thêm tài khoản', result.data);
+        openNotification('bottomLeft', 'Thêm tài khoản', result.data.message);
       }
     })
     .catch((err) => {
@@ -225,7 +227,7 @@ const deleteAccount = (id: number) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification('bottomLeft', 'Xóa tài khoản', result.data);
+        openNotification('bottomLeft', 'Xóa tài khoản', result.data.message);
       }
     })
     .catch((err) => {

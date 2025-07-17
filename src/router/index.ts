@@ -7,17 +7,21 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: () => import('../views/Home.vue'),
+      component: () => import('../views/HomeView.vue'),
       meta: {
         layout: 'guest-layout',
+        title: 'Truong Gia',
+        requiresAuth: false,
       },
     },
     {
       path: '/login',
       name: 'Login',
-      component: () => import('../views/cms/Login.vue'),
+      component: () => import('../views/cms/LoginView.vue'),
       meta: {
         layout: 'guest-layout',
+        title: 'Đăng nhập',
+        requiresAuth: false,
       },
     },
     {
@@ -31,6 +35,7 @@ const router = createRouter({
           meta: {
             layout: 'dashboard-layout',
             requiresAuth: true,
+            title: 'Dashboard',
           },
         },
         {
@@ -40,6 +45,7 @@ const router = createRouter({
           meta: {
             layout: 'dashboard-layout',
             requiresAuth: true,
+            title: 'Quản lý kỹ năng',
           },
         },
         {
@@ -49,6 +55,7 @@ const router = createRouter({
           meta: {
             layout: 'dashboard-layout',
             requiresAuth: true,
+            title: 'Quản lý dự án',
           },
         },
         {
@@ -58,6 +65,7 @@ const router = createRouter({
           meta: {
             layout: 'dashboard-layout',
             requiresAuth: true,
+            title: 'Quản lý thành viên',
           },
         },
         {
@@ -74,7 +82,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (!to.meta.requiresAuth) {
-    console.log(1);
     if (to.name === 'Login') {
       const token = localStorage.getItem('userToken');
       if (token) {
@@ -86,7 +93,6 @@ router.beforeEach((to, from, next) => {
   } else {
     // const authStore = useAuthStore();
     const token = localStorage.getItem('userToken');
-    console.log('🚀 ~ router.beforeEach ~ token:', token);
     // const isLogin = authStore.initialState.isLogin;
     if (!token || token == '') {
       if (to.name !== 'Login') {
@@ -116,6 +122,10 @@ router.beforeEach((to, from, next) => {
       return;
     }
   }
+});
+
+router.afterEach((to) => {
+  document.title = typeof to.meta.title === 'string' ? to.meta.title : 'Truong Gia';
 });
 
 export default router;

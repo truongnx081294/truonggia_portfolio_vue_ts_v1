@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { request } from '@/api/axiosInstance';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import '../assets/css/Home.css';
 import ProjectDivComponent from './ProjectDivComponent.vue';
 
 const listProject = ref();
-getListProject();
+
+onMounted(() => {
+  getListProject();
+});
 
 function getListProject() {
   request({
@@ -14,7 +17,7 @@ function getListProject() {
   })
     .then((res) => {
       if (res.status === 200) {
-        listProject.value = res.data;
+        listProject.value = res.data.data;
       }
     })
     .catch((err) => {
@@ -24,7 +27,7 @@ function getListProject() {
 </script>
 
 <template>
-  <div className="container">
+  <div className="project-card-container">
     <ProjectDivComponent v-for="(project, index) in listProject" :key="index" :project="project" />
   </div>
 </template>

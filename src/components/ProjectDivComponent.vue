@@ -18,7 +18,7 @@ defineProps(['project']);
     <p>{{ project.description }}</p>
     <div className="icon">
       <a v-if="project?.gitlink?.href" :href="`${project?.gitlink?.href}`" target="blank">
-        <img src="../images/github.svg" alt="github" :width="20" :height="20" />
+        <!-- <img src="../assests/images/github.svg" alt="github" :width="20" :height="20" /> -->
       </a>
     </div>
   </section>

@@ -10,12 +10,12 @@ import ProjectCard from './ProjectCardsComponent.vue';
       <ProjectCard />
     </div>
 
-    <div className="more">
+    <!-- <div className="more">
       <h2>If you`d like to see more</h2>
 
       <div className="more__links">
         <span><a href="/archive"> View Archive.</a> </span>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>

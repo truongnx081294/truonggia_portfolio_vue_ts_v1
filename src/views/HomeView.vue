@@ -1,4 +1,5 @@
 <template>
+  <NavbarComponent />
   <div className="container">
     <main className="main">
       <div className="left">
@@ -43,4 +44,5 @@ import About from '@/components/AboutComponent.vue';
 import Intro from '@/components/IntroductionsComponent.vue';
 import ContactIcons from '@/components/ContactIconsComponent.vue';
 import Projects from '@/components/ProjectsComponent.vue';
+import NavbarComponent from '@/components/NavbarComponent.vue';
 </script>

@@ -13,8 +13,8 @@ import ContactIcons from './ContactIconsComponent.vue';
 
       <p className="intro">
         I`m a <span>software developer</span> primarily focused on
-        <span>frontend development</span> using web technology. Always open to learning new things
-        and enjoy solving problems, making things work better.
+        <span>frontend development</span> using web technologies. I enjoy learning new technologies,
+        tackling challenges and constantly improving how things work.
       </p>
       <p className="available"><span>👇🏾</span> Currently open to opportunities</p>
 

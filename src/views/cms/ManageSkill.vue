@@ -5,7 +5,7 @@
 
   <Table :data-source="listSkill" :columns="columns" :loading="isLoading" bordered>
     <template #bodyCell="{ column, text, record }">
-      <template v-if="['name', 'description', 'type'].includes(column.dataIndex as string)">
+      <template v-if="['name'].includes(column.dataIndex as string)">
         <div>
           <Input
             v-if="editableData[record.id]"
@@ -17,11 +17,31 @@
           </template>
         </div>
       </template>
+      <template v-if="['type'].includes(column.dataIndex as string)">
+        <div>
+          <Select
+            v-if="editableData[record.id]"
+            v-model:value="editableData[record.id][column.dataIndex as keyof FormSkillState]"
+            style="margin: -5px 0"
+          >
+            <SelectOption
+              v-for="(type, index) in TYPE_SKILL_OPTIONS"
+              :key="index"
+              :value="type.value"
+            >
+              {{ type.label }}
+            </SelectOption>
+          </Select>
+          <template v-else>
+            {{ text === TYPE_SKILL.CORE_TECHNOLOGY ? 'Core Technology' : 'Familiar' }}
+          </template>
+        </div>
+      </template>
       <template v-if="column.key === 'action'">
         <div v-if="editableData[record.id]">
           <Button type="primary" :icon="h(SaveOutlined)" @click="saveSkill(record.id)">Save</Button>
           <Popconfirm
-            title="Are you sure cancel edit project?"
+            title="Are you sure cancel edit skill?"
             ok-text="Yes"
             cancel-text="No"
             @confirm="cancelEditSkill(record.id)"
@@ -33,7 +53,7 @@
           <Button type="primary" :icon="h(EditOutlined)" @click="editSkill(record.id)">Edit</Button>
         </div>
         <Popconfirm
-          title="Are you sure delete this project?"
+          title="Are you sure delete this skill?"
           ok-text="Yes"
           cancel-text="No"
           @confirm="confirm(text)"
@@ -57,30 +77,25 @@
       <FormItem
         label="Tên"
         name="name"
-        :rules="[{ required: true, message: 'Please input your project \'s name!' }]"
+        :rules="[{ required: true, message: 'Please input your skill \'s name!' }]"
       >
         <Input v-model:value="formSkillState.name" />
       </FormItem>
 
       <FormItem
-        label="Mô tả"
-        name="description"
-        :rules="[
-          {
-            required: true,
-            message: 'Please input your project \'s description!',
-          },
-        ]"
-      >
-        <Input v-model:value="formSkillState.description" />
-      </FormItem>
-
-      <FormItem
         label="Loại"
         name="type"
-        :rules="[{ required: true, message: 'Please input your project \'s type!' }]"
+        :rules="[{ required: true, message: 'Please input your skill \'s type!' }]"
       >
-        <Input v-model:value="formSkillState.type" />
+        <Select v-model:value="formSkillState.type">
+          <SelectOption
+            v-for="(type, index) in TYPE_SKILL_OPTIONS"
+            :key="index"
+            :value="type.value"
+          >
+            {{ type.label }}
+          </SelectOption>
+        </Select>
       </FormItem>
     </Form>
   </Modal>
@@ -97,9 +112,20 @@ import {
   SaveOutlined,
 } from '@ant-design/icons-vue';
 
-import { Button, Form, FormItem, Input, Modal, Popconfirm, Table } from 'ant-design-vue';
+import { TYPE_SKILL, TYPE_SKILL_OPTIONS } from '@/helper/constant';
+import {
+  Button,
+  Form,
+  FormItem,
+  Input,
+  Modal,
+  Popconfirm,
+  Select,
+  SelectOption,
+  Table,
+} from 'ant-design-vue';
 import { cloneDeep } from 'lodash-es';
-import { h, reactive, ref, type UnwrapRef } from 'vue';
+import { h, onMounted, reactive, ref, type UnwrapRef } from 'vue';
 import '../../assets/css/Dashboard.css';
 
 import { notification, type NotificationPlacement } from 'ant-design-vue';
@@ -109,12 +135,6 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    sorter: true,
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    key: 'description',
     sorter: true,
   },
   {
@@ -137,8 +157,10 @@ const columns = [
 
 const isLoading = ref<boolean>(false);
 
-let listSkill = ref();
-getListSkill();
+const listSkill = ref();
+onMounted(() => {
+  getListSkill();
+});
 
 function getListSkill() {
   isLoading.value = true;
@@ -150,7 +172,7 @@ function getListSkill() {
     },
   })
     .then((response) => {
-      listSkill.value = response.data;
+      listSkill.value = response.data.data;
     })
     .catch((err) => {
       console.log(err);
@@ -163,13 +185,11 @@ function getListSkill() {
 interface FormSkillState {
   id?: number;
   name: string;
-  description: string;
   type: string;
 }
 
 const formSkillState = reactive<FormSkillState>({
   name: '',
-  description: '',
   type: '',
 });
 
@@ -194,7 +214,7 @@ const addSkill = (data: FormSkillState) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification('bottomLeft', 'Thêm kỹ năng', result.data);
+        openNotification('bottomLeft', 'Thêm kỹ năng', result.data.message);
         getListSkill();
       }
     })
@@ -205,6 +225,7 @@ const addSkill = (data: FormSkillState) => {
 
 const dataSource = ref(listSkill);
 const editableData: UnwrapRef<Record<string, FormSkillState>> = reactive({});
+console.log("🚀 ~ editableData:", editableData)
 
 const editSkill = (id: number) => {
   editableData[id] = cloneDeep(
@@ -227,10 +248,10 @@ const saveSkill = (id: number) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification('bottomLeft', 'Sửa kỹ năng', result.data);
+        openNotification('bottomLeft', 'Sửa kỹ năng', result.data.message);
         delete editableData[id];
       } else {
-        openNotification('bottomLeft', 'Sửa kỹ năng', result.data);
+        openNotification('bottomLeft', 'Sửa kỹ năng', result.data.message);
       }
     })
     .catch((err) => {
@@ -252,7 +273,8 @@ const deleteSkill = (id: number) => {
   })
     .then((result) => {
       if (result.status === 200) {
-        openNotification('bottomLeft', 'Xóa kỹ năng', result.data);
+        openNotification('bottomLeft', 'Xóa kỹ năng', result.data.message);
+        getListSkill();
       }
     })
     .catch((err) => {

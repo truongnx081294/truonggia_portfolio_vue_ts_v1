@@ -373,6 +373,28 @@ body {
   fill: var(--text-color);
 }
 
+.list-icon-project {
+  margin-bottom: 1.2rem;
+}
+
+.list-icon-project a{
+  margin-right: 1rem;
+}
+
+.list-icon-project svg {
+  fill: var(--text-color) !important;
+}
+
+.list-icon-project .link-icon {
+  stroke: var(--text-color);
+}
+
+.list-tag-project .ant-tag {
+  color: var(--text-color);
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     padding: 0 2rem;

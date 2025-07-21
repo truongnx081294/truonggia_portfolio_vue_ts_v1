@@ -5,7 +5,13 @@
 
   <Table :data-source="listProject" :columns="columns" :loading="isLoading" bordered>
     <template #bodyCell="{ column, text, record }">
-      <template v-if="['name', 'description', 'type'].includes(column.dataIndex as string)">
+      <template
+        v-if="
+          ['name', 'description', 'type', 'link', 'github', 'tag'].includes(
+            column.dataIndex as string,
+          )
+        "
+      >
         <div>
           <Input
             v-if="editableData[record.id]"
@@ -86,6 +92,14 @@
       autocomplete="off"
     >
       <FormItem
+        label="Loại"
+        name="type"
+        :rules="[{ required: true, message: 'Please input your project \'s type!' }]"
+      >
+        <Input v-model:value="formProjectState.type" />
+      </FormItem>
+
+      <FormItem
         label="Tên"
         name="name"
         :rules="[{ required: true, message: 'Please input your project \'s name!' }]"
@@ -107,11 +121,23 @@
       </FormItem>
 
       <FormItem
-        label="Loại"
-        name="type"
-        :rules="[{ required: true, message: 'Please input your project \'s type!' }]"
+        label="Link"
+        name="link"
+        :rules="[{ message: 'Please input your project \'s link!' }]"
       >
-        <Input v-model:value="formProjectState.type" />
+        <Input v-model:value="formProjectState.link" />
+      </FormItem>
+
+      <FormItem
+        label="Github"
+        name="github"
+        :rules="[{ message: 'Please input your project \'s github!' }]"
+      >
+        <Input v-model:value="formProjectState.github" />
+      </FormItem>
+
+      <FormItem label="Tag" name="tag" :rules="[{ message: 'Please input your project \'s tag!' }]">
+        <Input v-model:value="formProjectState.tag" />
       </FormItem>
     </Form>
   </Modal>
@@ -169,6 +195,21 @@ const columns: ColumnItem[] = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
+  },
+  {
+    title: 'Link',
+    dataIndex: 'link',
+    key: 'link',
+  },
+  {
+    title: 'Github',
+    dataIndex: 'github',
+    key: 'github',
+  },
+  {
+    title: 'Tag',
+    dataIndex: 'tag',
+    key: 'tag',
     sorter: true,
   },
   {
@@ -219,12 +260,18 @@ interface FormProjectState {
   name: string;
   description: string;
   type: string;
+  link: string;
+  github: string;
+  tag: string;
 }
 
 const formProjectState = reactive<FormProjectState>({
   name: '',
   description: '',
   type: '',
+  link: '',
+  github: '',
+  tag: '',
 });
 
 const open = ref<boolean>(false);

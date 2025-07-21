@@ -1,8 +1,6 @@
 <script setup lang="ts">
 defineProps(['project']);
 import { Tag } from 'ant-design-vue';
-import github from '../assets/images/github.svg';
-import share from '../assets/images/share.svg';
 </script>
 
 <template>

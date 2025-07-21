@@ -3,14 +3,16 @@ import { Switch } from 'ant-design-vue';
 import '../assets/css/Home.css';
 import { ref, watchEffect } from 'vue';
 
-const isLight = ref(false);
+const isLight = ref(localStorage.getItem('theme') === 'light' ? true : false);
 
 watchEffect(() => {
   const html = document.documentElement;
   if (isLight.value) {
     html.classList.add('light');
+    localStorage.setItem('theme', 'light');
   } else {
     html.classList.remove('light');
+    localStorage.setItem('theme', 'dark');
   }
 });
 </script>

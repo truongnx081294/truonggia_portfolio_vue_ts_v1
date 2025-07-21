@@ -41,33 +41,37 @@
       </template>
 
       <template v-if="column.key === 'action'">
-        <div v-if="editableData[record.id]">
-          <Button type="primary" :icon="h(SaveOutlined)" @click="saveProject(record.id)"
-            >Save</Button
-          >
+        <Space>
+          <div v-if="editableData[record.id]">
+            <Space>
+              <Button type="primary" :icon="h(SaveOutlined)" @click="saveProject(record.id)"
+                >Save</Button
+              >
+              <Popconfirm
+                title="Are you sure cancel edit project?"
+                ok-text="Yes"
+                cancel-text="No"
+                @confirm="cancelEditProject(record.id)"
+              >
+                <Button danger :icon="h(CloseOutlined)">Cancel</Button>
+              </Popconfirm>
+            </Space>
+          </div>
+          <div v-else>
+            <Button type="primary" :icon="h(EditOutlined)" @click="editProject(record.id)"
+              >Edit</Button
+            >
+          </div>
           <Popconfirm
-            title="Are you sure cancel edit project?"
+            title="Are you sure delete this project?"
             ok-text="Yes"
             cancel-text="No"
-            @confirm="cancelEditProject(record.id)"
+            @confirm="confirm(text)"
+            @cancel="cancel"
           >
-            <Button danger :icon="h(CloseOutlined)">Cancel</Button>
+            <Button type="primary" danger :icon="h(DeleteOutlined)">Remove</Button>
           </Popconfirm>
-        </div>
-        <div v-else>
-          <Button type="primary" :icon="h(EditOutlined)" @click="editProject(record.id)"
-            >Edit</Button
-          >
-        </div>
-        <Popconfirm
-          title="Are you sure delete this project?"
-          ok-text="Yes"
-          cancel-text="No"
-          @confirm="confirm(text)"
-          @cancel="cancel"
-        >
-          <Button danger :icon="h(DeleteOutlined)">Remove</Button>
-        </Popconfirm>
+        </Space>
       </template>
     </template>
   </Table>
@@ -124,7 +128,17 @@ import {
   SaveOutlined,
 } from '@ant-design/icons-vue';
 
-import { Button, Form, FormItem, Input, Modal, Popconfirm, Switch, Table } from 'ant-design-vue';
+import {
+  Button,
+  Form,
+  FormItem,
+  Input,
+  Modal,
+  Popconfirm,
+  Space,
+  Switch,
+  Table,
+} from 'ant-design-vue';
 import { cloneDeep } from 'lodash-es';
 import { h, reactive, ref, type UnwrapRef } from 'vue';
 import '../../assets/css/Dashboard.css';

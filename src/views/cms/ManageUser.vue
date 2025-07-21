@@ -17,16 +17,18 @@
         <Avatar :src="text" alt="" />
       </template>
       <template v-if="column.key === 'action'">
-        <Button type="primary" :icon="h(EditOutlined)">Edit</Button>
-        <Popconfirm
-          title="Are you sure delete this account?"
-          ok-text="Yes"
-          cancel-text="No"
-          @confirm="confirm(text)"
-          @cancel="cancel"
-        >
-          <Button danger :icon="h(DeleteOutlined)">Remove</Button>
-        </Popconfirm>
+        <Space>
+          <Button type="primary" :icon="h(EditOutlined)">Edit</Button>
+          <Popconfirm
+            title="Are you sure delete this account?"
+            ok-text="Yes"
+            cancel-text="No"
+            @confirm="confirm(text)"
+            @cancel="cancel"
+          >
+            <Button danger :icon="h(DeleteOutlined)">Remove</Button>
+          </Popconfirm>
+        </Space>
       </template>
     </template>
   </Table>
@@ -100,6 +102,7 @@ import {
   Popconfirm,
   Radio,
   RadioGroup,
+  Space,
   Table,
   Upload,
 } from 'ant-design-vue';

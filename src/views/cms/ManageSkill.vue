@@ -59,29 +59,37 @@
         </div>
       </template>
       <template v-if="column.key === 'action'">
-        <div v-if="editableData[record.id]">
-          <Button type="primary" :icon="h(SaveOutlined)" @click="saveSkill(record.id)">Save</Button>
+        <Space>
+          <div v-if="editableData[record.id]">
+            <Space>
+              <Button type="primary" :icon="h(SaveOutlined)" @click="saveSkill(record.id)"
+                >Save</Button
+              >
+              <Popconfirm
+                title="Are you sure cancel edit skill?"
+                ok-text="Yes"
+                cancel-text="No"
+                @confirm="cancelEditSkill(record.id)"
+              >
+                <Button danger :icon="h(CloseOutlined)">Cancel</Button>
+              </Popconfirm>
+            </Space>
+          </div>
+          <div v-else>
+            <Button type="primary" :icon="h(EditOutlined)" @click="editSkill(record.id)"
+              >Edit</Button
+            >
+          </div>
           <Popconfirm
-            title="Are you sure cancel edit skill?"
+            title="Are you sure delete this skill?"
             ok-text="Yes"
             cancel-text="No"
-            @confirm="cancelEditSkill(record.id)"
+            @confirm="confirm(text)"
+            @cancel="cancel"
           >
-            <Button danger :icon="h(CloseOutlined)">Cancel</Button>
+            <Button type="primary" danger :icon="h(DeleteOutlined)">Remove</Button>
           </Popconfirm>
-        </div>
-        <div v-else>
-          <Button type="primary" :icon="h(EditOutlined)" @click="editSkill(record.id)">Edit</Button>
-        </div>
-        <Popconfirm
-          title="Are you sure delete this skill?"
-          ok-text="Yes"
-          cancel-text="No"
-          @confirm="confirm(text)"
-          @cancel="cancel"
-        >
-          <Button danger :icon="h(DeleteOutlined)">Remove</Button>
-        </Popconfirm>
+        </Space>
       </template>
     </template>
   </Table>
@@ -143,6 +151,7 @@ import {
   Popconfirm,
   Select,
   SelectOption,
+  Space,
   Switch,
   Table,
 } from 'ant-design-vue';

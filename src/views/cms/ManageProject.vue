@@ -17,6 +17,29 @@
           </template>
         </div>
       </template>
+
+      <template v-if="['is_show'].includes(column.dataIndex as string)">
+        <div>
+          <Switch
+            v-if="editableData[record.id]"
+            v-model:checked="editableData[record.id][column.dataIndex as keyof FormProjectState]"
+            :checked-children="'Yes'"
+            :un-checked-children="'No'"
+            style="margin: -5px 0"
+            :disabled="!editableData[record.id]"
+          />
+          <template v-else>
+            <Switch
+              :checked="text"
+              :checked-children="'Yes'"
+              :un-checked-children="'No'"
+              style="margin: -5px 0"
+              :disabled="true"
+            />
+          </template>
+        </div>
+      </template>
+
       <template v-if="column.key === 'action'">
         <div v-if="editableData[record.id]">
           <Button type="primary" :icon="h(SaveOutlined)" @click="saveProject(record.id)"
@@ -101,7 +124,7 @@ import {
   SaveOutlined,
 } from '@ant-design/icons-vue';
 
-import { Button, Form, FormItem, Input, Modal, Popconfirm, Table } from 'ant-design-vue';
+import { Button, Form, FormItem, Input, Modal, Popconfirm, Switch, Table } from 'ant-design-vue';
 import { cloneDeep } from 'lodash-es';
 import { h, reactive, ref, type UnwrapRef } from 'vue';
 import '../../assets/css/Dashboard.css';
@@ -132,6 +155,12 @@ const columns: ColumnItem[] = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
+    sorter: true,
+  },
+  {
+    title: 'Show',
+    dataIndex: 'is_show',
+    key: 'is_show',
     sorter: true,
   },
   {

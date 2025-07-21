@@ -17,6 +17,27 @@
           </template>
         </div>
       </template>
+      <template v-if="['is_show'].includes(column.dataIndex as string)">
+        <div>
+          <Switch
+            v-if="editableData[record.id]"
+            v-model:checked="editableData[record.id][column.dataIndex as keyof FormSkillState]"
+            :checked-children="'Yes'"
+            :un-checked-children="'No'"
+            style="margin: -5px 0"
+            :disabled="!editableData[record.id]"
+          />
+          <template v-else>
+            <Switch
+              :checked="text"
+              :checked-children="'Yes'"
+              :un-checked-children="'No'"
+              style="margin: -5px 0"
+              :disabled="true"
+            />
+          </template>
+        </div>
+      </template>
       <template v-if="['type'].includes(column.dataIndex as string)">
         <div>
           <Select
@@ -122,6 +143,7 @@ import {
   Popconfirm,
   Select,
   SelectOption,
+  Switch,
   Table,
 } from 'ant-design-vue';
 import { cloneDeep } from 'lodash-es';
@@ -141,6 +163,12 @@ const columns = [
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
+    sorter: true,
+  },
+  {
+    title: 'Show',
+    dataIndex: 'is_show',
+    key: 'is_show',
     sorter: true,
   },
   {
@@ -172,6 +200,7 @@ function getListSkill() {
     },
   })
     .then((response) => {
+      console.log('🚀 ~ .then ~ response:', response);
       listSkill.value = response.data.data;
     })
     .catch((err) => {
@@ -186,11 +215,13 @@ interface FormSkillState {
   id?: number;
   name: string;
   type: string;
+  is_show: number;
 }
 
 const formSkillState = reactive<FormSkillState>({
   name: '',
   type: '',
+  is_show: 0,
 });
 
 const open = ref<boolean>(false);
@@ -225,7 +256,6 @@ const addSkill = (data: FormSkillState) => {
 
 const dataSource = ref(listSkill);
 const editableData: UnwrapRef<Record<string, FormSkillState>> = reactive({});
-console.log("🚀 ~ editableData:", editableData)
 
 const editSkill = (id: number) => {
   editableData[id] = cloneDeep(

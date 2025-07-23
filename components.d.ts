@@ -9,7 +9,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AboutComponent: typeof import('./src/components/AboutComponent.vue')['default']
-    AButton: typeof import('ant-design-vue/es')['Button']
     ArchiveCardComponent: typeof import('./src/components/ArchiveCardComponent.vue')['default']
     ContactIconsComponent: typeof import('./src/components/ContactIconsComponent.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']

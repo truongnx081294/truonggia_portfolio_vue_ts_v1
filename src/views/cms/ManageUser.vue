@@ -9,7 +9,7 @@
     :data-source="listUser"
     :columns="columns"
     :loading="isLoading"
-    style="height: 100%"
+    style="max-height: 700px"
     bordered
   >
     <template #bodyCell="{ column, text }">

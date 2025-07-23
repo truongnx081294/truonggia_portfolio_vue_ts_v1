@@ -3,7 +3,14 @@
     <Button type="primary" :icon="h(PlusOutlined)" @click="showModal">Tạo mới</Button>
   </div>
 
-  <Table :data-source="listSkill" :columns="columns" :loading="isLoading" bordered>
+  <Table
+    :pagination="false"
+    :data-source="listSkill"
+    :columns="columns"
+    :loading="isLoading"
+    bordered
+    style="max-height: 700px; overflow-y: auto; margin-bottom: 16px"
+  >
     <template #bodyCell="{ column, text, record }">
       <template v-if="['name'].includes(column.dataIndex as string)">
         <div>
@@ -94,6 +101,16 @@
     </template>
   </Table>
 
+  <Pagination
+    v-model:current="pagination.currentPage"
+    v-model:pageSize="pagination.perPage"
+    show-size-changer
+    :total="pagination.totalItems"
+    @showSizeChange="onShowSizeChange"
+    @change="onChangePage"
+    style="display: flex; justify-self: flex-end; margin-top: 16px"
+  />
+
   <Modal v-model:open="open" title="Thêm kỹ năng" @ok="handleOk">
     <Form
       layout="vertical"
@@ -148,6 +165,7 @@ import {
   FormItem,
   Input,
   Modal,
+  Pagination,
   Popconfirm,
   Select,
   SelectOption,
@@ -194,7 +212,24 @@ const columns = [
 
 const isLoading = ref<boolean>(false);
 
+const onChangePage = (page: number, pageSize: number) => {
+  pagination.value.currentPage = page;
+  pagination.value.perPage = pageSize;
+  getListSkill();
+};
+
+const onShowSizeChange = (current: number, size: number) => {
+  pagination.value.currentPage = 1; // reset về page 1 nếu đổi pageSize
+  pagination.value.perPage = size;
+  getListSkill();
+};
+
 const listSkill = ref();
+const pagination = ref({
+  currentPage: 1,
+  perPage: 10,
+  totalItems: 0,
+});
 onMounted(() => {
   getListSkill();
 });
@@ -205,12 +240,13 @@ function getListSkill() {
     url: '/skills',
     method: 'GET',
     params: {
-      limit: 1000,
+      page: pagination.value.currentPage,
+      limit: pagination.value.perPage,
     },
   })
     .then((response) => {
-      console.log('🚀 ~ .then ~ response:', response);
-      listSkill.value = response.data.data;
+      listSkill.value = response.data.data.skills;
+      pagination.value = response.data.data.pagination;
     })
     .catch((err) => {
       console.log(err);

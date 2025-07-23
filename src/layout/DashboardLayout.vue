@@ -4,7 +4,7 @@
       <MenuDashboard />
     </LayoutSider>
     <Layout>
-      <LayoutContent style="padding-top: 16px">
+      <LayoutContent style="padding: 16px 8px; background-color: white">
         <!-- <p>{{ abc }}</p> -->
         <!-- <Breadcrumb>
           <BreadcrumbItem v-for="item in listRoute" :href="item">
@@ -33,6 +33,7 @@ const siderStyle: CSSProperties = {
   lineHeight: '120px',
   color: '#fff',
   backgroundColor: '#fff',
+  borderRight: '1px solid #f0f0f0',
 };
 
 // let abc = reactive(ref([1, 2, 3]));

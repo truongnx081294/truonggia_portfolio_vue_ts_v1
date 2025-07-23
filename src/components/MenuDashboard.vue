@@ -3,7 +3,7 @@
     id="dddddd"
     v-model:openKeys="openKeys"
     v-model:selectedKeys="selectedKeys"
-    style="width: 100%"
+    style="width: 100%; border-inline-end: none"
     mode="inline"
     :items="items"
     @click="handleClick"

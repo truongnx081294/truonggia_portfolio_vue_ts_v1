@@ -2,8 +2,14 @@
   <div style="display: flex; justify-content: space-between; padding: 0px 16px 24px">
     <Button type="primary" :icon="h(PlusOutlined)" @click="showModal">Tạo mới</Button>
   </div>
-
-  <Table :data-source="listProject" :columns="columns" :loading="isLoading" bordered>
+  <Table
+    :bordered="true"
+    :data-source="listProject"
+    :columns="columns"
+    :loading="isLoading"
+    :pagination="false"
+    style="max-height: 700px; overflow-y: auto"
+  >
     <template #bodyCell="{ column, text, record }">
       <template
         v-if="
@@ -81,6 +87,16 @@
       </template>
     </template>
   </Table>
+
+  <Pagination
+    v-model:current="pagination.currentPage"
+    v-model:pageSize="pagination.perPage"
+    show-size-changer
+    :total="pagination.totalItems"
+    @showSizeChange="onShowSizeChange"
+    @change="onChangePage"
+    style="display: flex; justify-self: flex-end; margin-top: 16px"
+  />
 
   <Modal v-model:open="open" title="Thêm dự án" @ok="handleOk">
     <Form
@@ -160,16 +176,29 @@ import {
   FormItem,
   Input,
   Modal,
+  Pagination,
   Popconfirm,
   Space,
   Switch,
   Table,
 } from 'ant-design-vue';
 import { cloneDeep } from 'lodash-es';
-import { h, reactive, ref, type UnwrapRef } from 'vue';
+import { h, onMounted, reactive, ref, type UnwrapRef } from 'vue';
 import '../../assets/css/Dashboard.css';
 
 import { notification, type NotificationPlacement } from 'ant-design-vue';
+
+const onChangePage = (page: number, pageSize: number) => {
+  pagination.value.currentPage = page;
+  pagination.value.perPage = pageSize;
+  getListProject();
+};
+
+const onShowSizeChange = (current: number, size: number) => {
+  pagination.value.currentPage = 1; // reset về page 1 nếu đổi pageSize
+  pagination.value.perPage = size;
+  getListProject();
+};
 
 type ColumnItem = {
   title: string;
@@ -233,7 +262,15 @@ const columns: ColumnItem[] = [
 const isLoading = ref<boolean>(false);
 
 const listProject = ref();
-getListProject();
+const pagination = ref({
+  currentPage: 1,
+  perPage: 10,
+  totalItems: 0,
+});
+
+onMounted(() => {
+  getListProject();
+});
 
 function getListProject() {
   isLoading.value = true;
@@ -241,11 +278,13 @@ function getListProject() {
     url: '/projects',
     method: 'GET',
     params: {
-      limit: 1000,
+      page: pagination.value.currentPage,
+      limit: pagination.value.perPage,
     },
   })
     .then((response) => {
-      listProject.value = response.data.data;
+      listProject.value = response.data.data.projects;
+      pagination.value = response.data.data.pagination;
     })
     .catch((err) => {
       console.log(err);

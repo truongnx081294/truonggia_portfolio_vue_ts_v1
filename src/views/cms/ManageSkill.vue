@@ -9,7 +9,7 @@
     :columns="columns"
     :loading="isLoading"
     bordered
-    style="max-height: 700px; overflow-y: auto; margin-bottom: 16px"
+    style="max-height: 700px; overflow-y: auto;"
   >
     <template #bodyCell="{ column, text, record }">
       <template v-if="['name'].includes(column.dataIndex as string)">
